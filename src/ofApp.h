@@ -3,6 +3,13 @@
 #include "ofMain.h"
 #include "ofxFaceTracker.h"
 
+#include "ofxOsc.h"
+
+// send host (aka ip address)
+#define HOST "localhost"
+
+/// send port
+#define PORT 8011
 
 class ofApp : public ofBaseApp{
 
@@ -14,4 +21,6 @@ class ofApp : public ofBaseApp{
 	ofVideoGrabber cam;
 	ofxFaceTracker tracker;
 	ExpressionClassifier classifier;
+	ofxOscSender sender;
+
 };

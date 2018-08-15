@@ -9,6 +9,9 @@ void ofApp::setup(){
 	tracker.setup();
 	tracker.setRescale(.5);
 	classifier.load("expressions");
+	
+	// setup osc
+	sender.setup(HOST, PORT);
 }
 
 //--------------------------------------------------------------
@@ -19,6 +22,12 @@ void ofApp::update(){
 			classifier.classify(tracker);
 		}
 	}
+	ofxOscMessage m;
+	m.setAddress("/smile");
+	float smileVal = classifier.getProbability(0);
+	m.addFloatArg(smileVal);
+	std::cout << smileVal << endl;
+	sender.sendMessage(m, false);
 }
 
 //--------------------------------------------------------------
